@@ -2,13 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Upload to AWS') {
             steps {
-                echo 'Hello world!!'
-                sh '''
-                  echo "Multiline shell steps works too"
-                  ls -lah
-                '''
+                echo 'Uploading files to S3...'
+                withAWS(region:'us-west-2',credentials:'aws-static') {
+                    s3Upload(pathStyleAccessEnabled:true, payloadSigningEnabled: true, file:'index.html', bucket:'waelson-static-web-site')
+                 } 
             }
         }
     }
