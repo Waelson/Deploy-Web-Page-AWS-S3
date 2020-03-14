@@ -1,7 +1,19 @@
 pipeline {
     agent any
+    
+    environment{
+        WORKSPACE_DIR = pwd()
+    }      
 
     stages {
+        stage('Lint HTML') {
+            steps {
+                echo 'Linting..'
+                dir("$WORKSPACE_DIR/"){
+                    sh 'tidy -q -e *.html'   
+                }
+            }
+        }        
         stage('Upload to AWS') {
             steps {
                 echo 'Uploading files to S3...'
