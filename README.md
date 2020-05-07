@@ -1,2 +1,3 @@
 # static
-Repository only to test continuous integration and continuous deployment on AWS.
+This is a simple repository to demonstrate a pipeline to deploy static web site on AWS S3.
+
